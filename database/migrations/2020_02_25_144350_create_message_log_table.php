@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGroupTable extends Migration
+class CreateMessageLogTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateGroupTable extends Migration
      */
     public function up()
     {
-        Schema::create('group', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('message_log', function (Blueprint $table) {
+            $table->string('user_id');
+            $table->string('user_name');
+            $table->string('message');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateGroupTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group');
+        Schema::dropIfExists('message_log');
     }
 }

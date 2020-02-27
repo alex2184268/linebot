@@ -28,14 +28,21 @@ Route::get('/', function(){
 
 Route::middleware(['auth'])->group(function () 
 {
-    Route::get('apporve', 'ApporveController@index')->name('apporve');   //顯示未審核人員
+
+    Route::get('apporve', 'ApporveController@index')->name('apporve'); //顯示未審核人員
 
     Route::get('users.approve/{user_id}', 'ApporveController@apporve')->name('users.approve'); //審核
 
     Route::post('delete', 'ApporveController@delete')->name('delete');  //取消審核
 
-    
+    Route::get('group.manage','GroupController@index')->name('group'); //群組管理
+
+    Route::get('school.group','GroupController@school_manage')->name('school.group'); //學校管理
 
 });
+
+
+Route::post('test', 'LineWebhookController@webhook')->name('line.webhook');
+
 
 

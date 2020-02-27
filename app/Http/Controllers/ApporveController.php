@@ -19,7 +19,15 @@ class ApporveController extends Controller
         $user->apporved = now();
 
         if ($user->save()) {
-            return redirect()->route('home')->withMessage('審核成功'); //審核成功
+            $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('gBQKRzMBMThDW7dhQhwfyHad3jp27SMGi/YiB0hsCM+veDAhuMYd3awSh/9dUyOys6F0wT+3wbl3dpnC5DONrlH3zk5mnrz7a5igamK3SArSkYwBh6WTGt3xvhAZWQUe0/L4y+RHbpS188I9LjOjJgdB04t89/1O/w1cDnyilFU=');
+            $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '582dabf4363f6b9783f5de5d2247b194']);
+            
+            $time = now();
+
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("您好!! 您的帳號已被審核成功 審核時間:{$time}");
+            $response = $bot->pushMessage("{$user_id}", $textMessageBuilder);
+
+            return redirect()->route('apporve')->withMessage('審核成功'); //審核成功
         }
 
     }
@@ -36,7 +44,7 @@ class ApporveController extends Controller
             /** $httpClient = channel access token  $bot = channel secret */
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('您好! 您的審核未通過');
 
-            $bot->pushMessage("{$delete}",$textMessageBuilder);
+            $bot->pushMessage("{$delete}", $textMessageBuilder);
 
         } catch (\Throwable $th) {
             return $th->getMessage();

@@ -17,7 +17,7 @@ class GroupController extends Controller
 
     public function school_manage()
     {
-        $district = School::with('district')->get();
-        return view('school',[ 'school' => $district ]);
+        $school = School::all();
+        return view('school',[ 'school' => $school ]);
     }
 }

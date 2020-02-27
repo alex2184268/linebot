@@ -16,6 +16,6 @@ class District extends Model
 
     public function school()
     {
-        return $this->hasOne('App\School','DISTRICT');
+        return $this->hasMany('App\School');
     }
 }

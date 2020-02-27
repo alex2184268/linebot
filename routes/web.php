@@ -1,5 +1,5 @@
 <?php
-
+use App\School;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +38,13 @@ Route::middleware(['auth'])->group(function ()
     Route::get('group.manage','GroupController@index')->name('group'); //群組管理
 
     Route::get('school.group','GroupController@school_manage')->name('school.group'); //學校管理
+
+    Route::post('edit.school','EditController@school')->name('edit.school'); //編輯學校
+
+    Route::post('delete.school',function(Request $request){
+        $sql = School::find($request->data)->delete();
+        return redirect()->back();
+    })->name('delete.school');
 
 });
 

@@ -16,7 +16,7 @@
                     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="搜尋學校名稱" >
                     <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="搜尋地區" >
                     <label for=""></label>
-                        <table id="myTable" class="table  table-bordered table-responsive table-primary text-black col-xs-10">
+                        <table id="myTable" class="table table-primary text-black ">
                             <thead>
                                 <tr>
                                     <td>地區</td>
@@ -27,9 +27,23 @@
                             <tbody>
                                 @forelse ($school as $value)
                                     <tr>
-                                        <td>{{ $value->DISTRICT }}</td>
-                                        <td>{{ $value->SCHOOL_NANE}}</td>
-                                        <td>{{ $value->school_type}}</td>
+                                        <td>{{ $value->district->DISTRICT }}</td>
+                                        <td>{{ $value->SCHOOL_NAME }}</td>
+                                        <td>{{ App\Group::find($value->school_type)->school_type }}</td>
+                                        <td>
+                                            <form action="{{ route('edit.school')}}" method="POST">
+                                                @csrf
+                                                <input id="data" name="data" value="{{ $value->id }}" type="hidden">
+                                                <button type="submit" class="btn btn-primary btn-lg btn-block">編輯</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form action="{{route('delete.school')}}" method="POST">
+                                                @csrf
+                                                <input id="delete" name="delete" value="{{ $value->id }}" type="hidden">
+                                                <button type="submit" class="btn btn-danger btn-lg btn-block" onclick="return confirm('確定刪除?');">刪除</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @empty
                                     
@@ -49,7 +63,7 @@
                             
                             // search td value,if not match return
                             for (i = 0; i < tr.length; i++) {
-                                td = tr[i].getElementsByTagName("td")[0];//td element
+                                td = tr[i].getElementsByTagName("td")[0];//搜尋地區
                                 if (td) {
                                     txtValue = td.textContent || td.innerText;
                                     if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -71,7 +85,7 @@
                             
                             // search td value,if not match return
                             for (i = 0; i < tr.length; i++) {
-                                td = tr[i].getElementsByTagName("td")[2];//td element
+                                td = tr[i].getElementsByTagName("td")[1];//搜尋學校
                                 if (td) {
                                     txtValue = td.textContent || td.innerText;
                                     if (txtValue.toUpperCase().indexOf(filter) > -1) {

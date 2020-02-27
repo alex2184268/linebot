@@ -14,13 +14,15 @@ class School extends Model
 
     protected $primaryKey = 'id';
 
-    public function district()
-    {
-        return $this->belongsTo('App\District','fk_district');
-    }
-
     public function group()
     {
-        return $this->belongsTo('App\Group','fk_school_type	');
+        return $this->belongsTo('App\Group','id');
     }
+
+    public function district()
+    {
+        return $this->belongsTo('App\District');
+    }
+
+    
 }

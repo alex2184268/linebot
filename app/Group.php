@@ -16,6 +16,6 @@ class Group extends Model
 
     public function school()
     {
-        return $this->hasOne('App\School','school_type');
+        return $this->hasMany('App\School');
     }
 }

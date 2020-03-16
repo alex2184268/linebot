@@ -1,5 +1,6 @@
 <?php
 use App\School;
+use App\Line;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,10 +42,24 @@ Route::middleware(['auth'])->group(function ()
 
     Route::post('edit.school','EditController@school')->name('edit.school'); //編輯學校
 
+    Route::post('edit.group','EditController@group')->name('edit.group'); //編輯群組
+
+    
+    Route::post('update.user', 'EditController@update_user')->name('update.user'); //確定修改用戶
+
+    Route::get('push.message','PushController@index')->name('push.message');//推送訊息
+
     Route::post('delete.school',function(Request $request){
         $sql = School::find($request->data)->delete();
         return redirect()->back();
     })->name('delete.school');
+
+    Route::post('delete.user',function(Request $request){
+        $sql = Line::find($request->data)->delete();
+        return redirect()->back();
+    })->name('delete.user');
+
+    //Route::get('push.message','PushController@index')->name('push.message');
 
 });
 

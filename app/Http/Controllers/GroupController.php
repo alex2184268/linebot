@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 use App\School;
 use App\District;
 use App\Group;
+use App\Line;
 
 class GroupController extends Controller
 {
     public function index()
     {
-        
-        return view('group');
+        $user = Line::all();
+        return view('group',[
+            'user' => $user,
+        ]);
     }
 
     public function school_manage()

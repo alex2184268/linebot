@@ -52,6 +52,12 @@
                                 {{ __('學校群組管理') }}
                             </a>
                         </ul>
+
+                        <ul class="navbar-nav  navbar-right">
+                            <a class="nav-link" href="{{ route('push.message') }}">
+                                {{ __('LINE訊息群發') }}
+                            </a>
+                        </ul>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

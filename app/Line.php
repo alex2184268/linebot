@@ -9,7 +9,7 @@ class Line extends Model
     protected $table = 'line_user';
 
     protected $fillable = [
-        'user_id', 'user_name', 'user_picture',
+        'user_id', 'user_name', 'user_picture', 'created_at', 'apporved', 'person_name','school','phone'
     ];
 
     protected $primaryKey = 'user_id';//主鍵

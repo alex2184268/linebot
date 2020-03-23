@@ -44,10 +44,24 @@ Route::middleware(['auth'])->group(function ()
 
     Route::post('edit.group','EditController@group')->name('edit.group'); //編輯群組
 
-    
+
     Route::post('update.user', 'EditController@update_user')->name('update.user'); //確定修改用戶
 
+    Route::get('custom','PushController@custom')->name('custom');//自訂群組發送訊息
+
+    Route::get('push.school', 'PushController@school')->name('push.school');//學校分群訊息
+
+    /* Route::get('push.district','PushController@district')->name('push.district');//地區分群訊息
+
     Route::get('push.message','PushController@index')->name('push.message');//推送訊息
+
+    Route::get('push.text','PushController@text')->name('push.text');*/
+
+    Route::get('confirm','PushController@confirm')->name('confirm');
+
+    Route::get('push','PushController@push')->name('push');
+
+    Route::post('check','PushController@check')->name('check');
 
     Route::post('delete.school',function(Request $request){
         $sql = School::find($request->data)->delete();
@@ -59,7 +73,7 @@ Route::middleware(['auth'])->group(function ()
         return redirect()->back();
     })->name('delete.user');
 
-    //Route::get('push.message','PushController@index')->name('push.message');
+    Route::get('value','PushController@value')->name('value');
 
 });
 

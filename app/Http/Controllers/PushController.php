@@ -8,15 +8,46 @@ use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use App\School;
 use App\District;
+use App\Group;
+use Illuminate\Http\Request;
+
 
 class PushController extends Controller
 {
     public function index()
     {
+        return view('push_message');
+    }
+
+    public function custom()
+    {
+        
+
+    }
+
+    public function school()
+    {
         $school = School::all();
         $district = District::all();
-        return view('push_message',['school' => $school, 'district' => $district]);
+        $group = Group::all();
+        return view('push_school', ['school' => $school, 
+                                    'district' => $district,
+                                    'group'=> $group]);
 
+    }
+
+    public function district()
+    {
+        $school = School::all();
+        $district = District::all();
+        return view('push_district', ['school' => $school, 'district' => $district]);
+
+        
+    }
+
+    public function text()
+    {
+        return view('push_text');
     }
 
     public function push()
@@ -28,14 +59,57 @@ class PushController extends Controller
 
             //$httpClient = channel access token  $bot = channel secret
 
-            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('12345');
+            
+
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('1','3');//放最多5個參數
+
+            $imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder('https://reurl.cc/qdmkZR','https://reurl.cc/qdmkZR');
+
+            $msg = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
+
+            $msg->add($textMessageBuilder);
+            $msg->add($imageMessageBuilder);
+
+            
+            /**
+             * 
+             * 'type' => MessageType::IMAGE,
+             * 'originalContentUrl' => $this->originalContentUrl,
+             * 'previewImageUrl' => $this->previewImageUrl,
+             */
 
             $userIds = ['U51cbf7fcc05c0be743af13086dec11f1']; //userID
-            $bot->multicast($userIds, $textMessageBuilder); //$textMessageBuilder文字訊息物件
+            $bot->multicast($userIds, $msg); //$textMessageBuilder文字訊息物件
+            //$bot->multicast($userIds, '<message>');
+
 
         } catch (\Throwable $th) { //throw error message
-            return $th->getMessage(); //get error message
+            $error = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($th->getMessage());
+            $userIds = ['U51cbf7fcc05c0be743af13086dec11f1']; //userID
+            $bot->multicast($userIds, $error); //$textMessageBuilder文字訊息物件
+
+
         }
 
+    }
+
+    public function check(Request $request)
+    {
+        $a = $request->input('SchoolCode');
+        $school_id = array_values($a);
+        $school_name = array_keys($a);
+        
+        foreach ($school_id as $value) {
+            $user = User::where('school_id',$value)->get();
+        }
+
+        return view('push_message',[
+            'school_name' => $school_name,
+            'school_id' => $school_id,]);
+    }
+
+    public function value(Request $request)
+    {
+        return $request;
     }
 }

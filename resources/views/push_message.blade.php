@@ -5,23 +5,24 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">選擇群組</div>
-                
+                <div class="card-header">確認發送單位</div>
                 <div class="card-body">
-                    <form action="">
-                        @foreach ($district as $value)
-                            <tr>
-                                <td>
-                                    <h4>{{ $value->DISTRICT }}</h4>
-                                    @foreach ($school as $item)
-                                        @if ($value->id == $item->district_id)
-                                        <h6>{{ $item->SCHOOL_NAME }}</h6>
-                                        @endif
-                                    @endforeach
-                                </td>
-                            </tr>
+                    <table>
+                        <form action="{{ route('push')}}" method="POST">
+                            @csrf
+                            @foreach ($school_name as $item)
+                        <tr>
+                            <td>
+                                <h6>{{ $item }}</h6>
+                            </td>
+                        </tr>
                         @endforeach
-                    </form>
+                        @foreach ($school_id as $value)
+                            <input hidden type="array" name="school_id[]" id="school_id" value="{{ $value }}">
+                        @endforeach
+                        
+                        </form>
+                    </table>
                 </div>
             </div>
         </div>

@@ -54,7 +54,7 @@
                         </ul>
 
                         <ul class="navbar-nav  navbar-right">
-                            <a class="nav-link" href="{{ route('push.message') }}">
+                            <a class="nav-link" href="{{ route('push.school') }}">
                                 {{ __('LINE訊息群發') }}
                             </a>
                         </ul>

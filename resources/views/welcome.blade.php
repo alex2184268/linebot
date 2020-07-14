@@ -74,7 +74,7 @@
                         <a href="{{ route('login') }}">登入</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">註冊</a>
+                            <!--<a href="{{ route('register') }}">註冊</a> -->
                         @endif
                     @endauth
                 </div>

@@ -13,8 +13,8 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="搜尋學校名稱" >
-                    <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="搜尋地區" >
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="搜尋地區" >
+                    <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="搜尋學校名稱" >
                     <label for=""></label>
                         <table id="myTable" class="table table-primary text-black ">
                             <thead>

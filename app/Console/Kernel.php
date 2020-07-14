@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -12,10 +14,15 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
+
+    // 如果有自定義的Command，這要在這先註冊 class name
+
     protected $commands = [
+         \App\Console\Commands\TestCommand::class,
         //
     ];
 
+    //分 時 日 月 周
     /**
      * Define the application's command schedule.
      *
@@ -24,8 +31,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('test:Log')->everyMinute();
+//cron not working 
+
+
     }
 
     /**
@@ -36,6 +45,8 @@ class Kernel extends ConsoleKernel
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');
+
+        
 
         require base_path('routes/console.php');
     }

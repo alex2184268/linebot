@@ -5,21 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\School;
 use App\Line;
+use App\District;
+use App\Group;
 
 class EditController extends Controller
 {
     public function school(Request $request)
     {
         $id = $request->data;
-        $school = School::find($id)->get();
+        $school = School::find($id);
+        $district = District::all();
+        $group = Group::all();
 
-        return view('edit_school',[ 'school'=>$school]);
+        return view('edit_school',[ 'school'=> $school,
+                                    'district' => $district,
+                                    'group' => $group ]);
     }
 
     public function group(Request $request)
     {
         $id = $request->data;
-        $user = Line::where('user_id',$id)->get();
+        $user = Line::find($id);
         $school = School::all();
 
         return view('edit_user', ['user' => $user, 'school'=>$school]);

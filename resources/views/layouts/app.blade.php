@@ -58,6 +58,12 @@
                                 {{ __('LINE訊息群發') }}
                             </a>
                         </ul>
+
+                        <ul class="navbar-nav  navbar-right">
+                            <a class="nav-link" href="{{ route('excel') }}">
+                                {{ __('Excel匯入學校') }}
+                            </a>
+                        </ul>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -69,7 +75,7 @@
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('註冊') }}</a>
+                                    <!--<a class="nav-link" href="{{ route('register') }}">{{ __('註冊') }}</a> -->
                                 </li>
                             @endif
                         @else
@@ -79,11 +85,15 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('upload_user')}}">
+                                        {{ __('匯入使用者') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('登出') }}
                                     </a>
+
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

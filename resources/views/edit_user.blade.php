@@ -10,22 +10,21 @@
                         <div class="card-body text-center">
                             <form action="{{ route('update.user')}}" method="POST"  >
                                 @csrf
-                                @forelse ($user as $value)
-                                <input hidden type="text" value="{{ $value->user_id }}" name="user_id" required>
+                                
+                                <input hidden type="text" value="{{ $user->id }}" name="user_id" required>
                                 <div class="form-group ">
                                     <h5>Line</h5>
-                                    <input type="text" value="{{ $value->user_name}}" name="user_name" required>
                                 </div>
                                 <div class="form-group">
                                     <h5>用戶姓名</h5>
-                                    <input type="text" value="{{ $value->person_name}}" name="person_name" required>
+                                    <input type="text" value="{{ $user->person_name}}" name="person_name" required>
                                 </div>
                                 <div class="form-group">
                                     <h5>學校</h5>
                                     <select name="school" id="school">
                                                         <option value="" selected></option>
                                                     @forelse ($school as $value)
-                                                        <option value="{{ $value->SCHOOL_NAME}}" >{{ $value->SCHOOL_NAME}}</option>
+                                                        <option value="{{ $value->id}}" >{{ $value->SCHOOL_NAME}}</option>
                                                     @empty
                                                         
                                                     @endforelse
@@ -33,7 +32,7 @@
                                 </div>
                                 <div class="form-group">
                                     <h5>連絡電話</h5>
-                                    <input type="text" value="{{ $value->phone}}" name="phone" >
+                                    <input type="text" value="{{ $user->phone}}" name="phone" >
                                 </div>
                                 <div>
                                     <button type="submit" class="btn btn-primary " alt="submit">確定修改</button>
@@ -41,10 +40,6 @@
                             </form>
                                </div>
                 </div>
-                                @empty
-
-                                <h6>沒有資料</h6>
-                                @endforelse
                         </div>
                 </div>
         </div>

@@ -7,12 +7,6 @@
             <div class="card">
                 <div class="card-header">輸入訊息</div>
                 
-                <div class="card-body">
-                    <form action="">
-                      
-                      <button type="submit" class="btn btn-primary">繼續確認</button>
-                    </form>
-                </div>
             </div>
         </div>
     </div>

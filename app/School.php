@@ -12,6 +12,8 @@ class School extends Model
         'id','district_id','SCHOOL_NAME','create_time','school_type'
     ];
 
+    public $timestamps = false;
+
     protected $primaryKey = 'id';
 
     public function group()

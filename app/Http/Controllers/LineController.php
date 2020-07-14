@@ -19,7 +19,7 @@ class LineController extends Controller
     public function __construct()
     {
         $this->channel_access_token = "gBQKRzMBMThDW7dhQhwfyHad3jp27SMGi/YiB0hsCM+veDAhuMYd3awSh/9dUyOys6F0wT+3wbl3dpnC5DONrlH3zk5mnrz7a5igamK3SArSkYwBh6WTGt3xvhAZWQUe0/L4y+RHbpS188I9LjOjJgdB04t89/1O/w1cDnyilFU=";
-        $this->channel_secret = "582dabf4363f6b9783f5de5d2247b194";
+        $this->channel_secret = "582dabf4363f6b9783f5de5d2247b194";//secret 
 
         $httpClient = new CurlHTTPClient($this->channel_access_token);
         $this->bot  = new LINEBot($httpClient, ['channelSecret' => $this->channel_secret]);

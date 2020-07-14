@@ -63,6 +63,8 @@ Route::middleware(['auth'])->group(function ()
 
     Route::post('check','PushController@check')->name('check');
 
+    Route::post('value', 'PushController@value')->name('value'); //測試request value
+
     Route::post('delete.school',function(Request $request){
         $sql = School::find($request->data)->delete();
         return redirect()->back();
@@ -73,12 +75,23 @@ Route::middleware(['auth'])->group(function ()
         return redirect()->back();
     })->name('delete.user');
 
-    Route::get('value','PushController@value')->name('value');
+    Route::get('push_text','PushController@push_text')->name('push_text');
+
+    Route::get('excel','ExcelController@index')->name('excel');
+    
+    Route::post('upload', 'ExcelController@upload')->name('upload');//上傳excel
+
+    Route::get('upload_user', function(){
+        return view('upload_user');
+    })->name('upload_user'); //上傳使用者
+
+    Route::post('import_user','ImportController@import')->name('import_user');//新增使用者的controller
+
+    
 
 });
 
 
 Route::post('test', 'LineWebhookController@webhook')->name('line.webhook');
-
 
 

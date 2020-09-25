@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Log;
 use Illuminate\Http\Request;
-use Ycs77\LaravelLineBot\Contracts\Response;
-use Ycs77\LaravelLineBot\LineBotService;
+/*use Ycs77\LaravelLineBot\Contracts\Response;
+use Ycs77\LaravelLineBot\LineBotService;*/
+
+use LINE\LINEBot\Constant\HTTPHeader;
+
+
+
 
 class LineBotController extends Controller
 {
@@ -28,7 +33,7 @@ class LineBotController extends Controller
 
         $sql = new Log;
         $sql->user_id = $user_id; //user id
-        $sql->user_name = $profile['displayName']; 
+        $sql->user_name = $profile['displayName']; //名稱
         $sql->message = $text;
         $sql->created_at = now();
         $sql->save();
@@ -36,4 +41,6 @@ class LineBotController extends Controller
 
         return $this->lineBotReply($request, $response);
     }
+
+    
 }

@@ -1,8 +1,14 @@
+# LineBot
+
+# 遇到的ERROR處理辦法及重要筆記
 
 ## Log could not be opened: failed to open stream: Permission denied 解決方法
 *  chown laradock:laradock ./storage -R
 
 ## Request Message array 格式
+
+## LINE Message 格式
+```
  array (
   'events' =>
   array (
@@ -25,4 +31,6 @@
     ),
   ),
   'destination' => 'Ued2b13xxxxxx804b',
-) 
+)
+```
+

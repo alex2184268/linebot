@@ -33,9 +33,9 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    @if (Auth::check())
                     <ul class="navbar-nav mr-auto">
                         <ul class="navbar-nav  navbar-right">
                             <a class="nav-link" href="{{ route('apporve') }}">
@@ -65,7 +65,7 @@
                             </a>
                         </ul>
                     </ul>
-
+                    @endif
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -75,7 +75,7 @@
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <!--<a class="nav-link" href="{{ route('register') }}">{{ __('註冊') }}</a> -->
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('註冊') }}</a> 
                                 </li>
                             @endif
                         @else

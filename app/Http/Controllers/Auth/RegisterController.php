@@ -48,11 +48,17 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $messages = array(
+            'name.max'     => '您的使用者名稱過長。', 
+            'email.unique' => '這信箱已經被註冊過。',
+            'password.min' => '密碼必須至少為8個字符。',
+        );
+        /**Validator::make($input, $rules, $messages); */
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:20'],
+            'email' => ['required', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        ], $messages);
     }
 
     /**

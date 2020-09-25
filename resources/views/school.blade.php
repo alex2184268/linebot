@@ -78,7 +78,7 @@
                         function myFunction2(){
                             // Declare variables
                             var input, filter, table, tr, td, i, txtValue;
-                            input = document.getElementById("myInput2");
+                            input = document.getElementById("myInput2");//取得ID
                             filter = input.value.toUpperCase();
                             table = document.getElementById("myTable");
                             tr = table.getElementsByTagName("tr");

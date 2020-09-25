@@ -1,51 +1,48 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
+use App\Log;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use LINE\LINEBot;
 use LINE\LINEBot\Constant\HTTPHeader;
-use LINE\LINEBot\SignatureValidator;
-use LINE\LINEBot\HTTPClient\CurlHTTPClient;
-use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
-use Exception;
+
 
 class LineWebhookController extends Controller
 {
 
-    public function webhook (Request $request)
-    {
-        $lineAccessToken = "gBQKRzMBMThDW7dhQhwfyHad3jp27SMGi/YiB0hsCM+veDAhuMYd3awSh/9dUyOys6F0wT+3wbl3dpnC5DONrlH3zk5mnrz7a5igamK3SArSkYwBh6WTGt3xvhAZWQUe0/L4y+RHbpS188I9LjOjJgdB04t89/1O/w1cDnyilFU="; //前面申請到的Channel acess token(long-lived)
-        $lineChannelSecret = "582dabf4363f6b9783f5de5d2247b194";//前面申請到的Channel secret
+    public function webhook(Request $request){
+        $channel_access_token = "8nJlQRLvT+UhK0OeNm+e7DBtPpI2U5BQw44n22mZ7jkrYknKd0E4kOcc6fseFluiBByDxp7iNKPiCN+i1ywq5lMBrw4kX77KNDjErg2+5tzbmyqCbvkHqzhnuQuprAdlb7ej5VZa61hUzW5GQMer5wdB04t89/1O/w1cDnyilFU=";
+        $channel_secret = "803d36e8fe03804672351bce451b4ca7";
 
-       
-        $signature = $request->headers->get(HTTPHeader::LINE_SIGNATURE);
-        if (!SignatureValidator::validateSignature($request->getContent(), $lineChannelSecret, $signature)) {
-           
-            return;
-        }
-
-        $httpClient = new CurlHTTPClient ($lineAccessToken);
-        $lineBot = new LINEBot($httpClient, ['channelSecret' => $lineChannelSecret]);
-
-        try {
-          
-            $events = $lineBot->parseEventRequest($request->getContent(), $signature);
-
-            foreach ($events as $event) {
-                
-                $replyToken = $event->getReplyToken();
-                  $text = $event->getText();// 得到使用者輸入
-           $lineBot->replyText($replyToken, $text);// 回復使用者輸入
-                //$textMessage = new TextMessageBuilder("你好");
-              //  $lineBot->replyMessage($replyToken, $textMessage);
+        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient($channel_access_token);
+        $bot = new \LINE\LINEBot($httpClient,['channelSecret' => $channel_secret]);
+        $signature = $request->header(HTTPHeader::LINE_SIGNATURE); //取得sign簽證 
+        $body = $request->getContent();
+        $events = $bot->parseEventRequest($body, $signature);
+        foreach ($events as $event) {
+            if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) { //確認是否跟TextMessage同一個CLASS
+                $reply_token = $event->getReplyToken();
+                $text = "已收到您的訊息";
+                $bot->replyText($reply_token, $text);
             }
-        } catch (Exception $e) {
-           
-            return;
         }
 
-        return;
+        /**儲存訊息 */
+        $input = $request->all(); //api all
+        $text = array_get($input, 'events.0.message.text'); //object text
+        $user_id = array_get($input, 'events.0.source.userId'); //object userID
+        $response = $bot->getProfile($user_id);
+        if ($response->isSucceeded()) {
+            $profile = $response->getJSONDecodedBody();
+            $sql = new Log;
+            $sql->user_id = $user_id; //user id
+            $sql->user_name = $profile['displayName']; //名稱
+            $sql->message = $text;
+            $sql->created_at = now();
+            $sql->save();
+
+        }
+
     }
 }

@@ -17,7 +17,9 @@ Route::get('/', function () {
 });*/
 
 
-Route::post('webhook', 'LineBotController@webhook');
+//Route::post('webhook', 'LineBotController@webhook');
+
+Route::any('webhook','LineWebhookController@webhook');//測試webhook
 
 Auth::routes();
 
@@ -87,11 +89,11 @@ Route::middleware(['auth'])->group(function ()
 
     Route::post('import_user','ImportController@import')->name('import_user');//新增使用者的controller
 
-    
-
 });
 
+Route::get('register.member', 'RegisterMemberController@index')->name('register_member');
 
-Route::post('test', 'LineWebhookController@webhook')->name('line.webhook');
+
+//Route::post('test', 'LineWebhookController@webhook')->name('line.webhook');
 
 

@@ -20,22 +20,25 @@
                                 <th>UserID</th>
                                 <th>Line名稱</th>
                                 <th>註冊時間</th>
-                                <th></th>
+                                <th>單位</th>
                                 <th></th>
                             </tr>
                             @forelse ($users as $user)
                                 <tr>
+                                    <form action="{{ route('users.approve')}}" method="POST">
+                                    @csrf
+                                    <input id="user_id" name="user_id" type="text" value="{{$user->user_id}}" hidden>
                                     <td>{{ $user->user_id }}</td>
-                                    <td>{{ $user->user_name }}</td>
+                                    <td>{{ $user->person_name }}</td>
                                     <td>{{ $user->created_at }}</td>
-                                    <td><a href="{{ route('users.approve', $user->user_id) }}"
-                                           class="btn btn-primary btn-sm">審核確認</a>
-                                    </td>
+                                    <td>{{ App\School::find("$user->school")->SCHOOL_NAME }}</td>
+                                    <td><button type="submit" class="btn btn-success btn-sm " onclick="return confirm('確定通過?');">審核通過</button></td>
+                                    </form>
                                     <td>
-                                      <form action="{{ route('delete')}}" method="post">
+                                        <form action="{{ route('delete')}}" method="post">
                                         @csrf
-                                          <input id="delete" name="delete" value="{{ $user->user_id }}" type="hidden">
-                                          <button type="submit" class="btn btn-danger btn-sm " onclick="return confirm('確定刪除?');">刪除</button>
+                                            <input id="delete" name="delete" value="{{ $user->user_id }}" type="hidden">
+                                            <button type="submit" class="btn btn-danger btn-sm " onclick="return confirm('確定刪除?');">刪除</button>
                                         </form>
                                     </td>
 

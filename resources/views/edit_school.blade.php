@@ -8,8 +8,9 @@
                 <div class="card bg-info text-white">
                         <div class="card-header text-center">學校管理</div>
                         <div class="card-body text-center">
-                            <form action="{{ route('update.user')}}" method="POST"  >
+                            <form action="{{ route('update.school')}}" method="POST"  >
                                 @csrf
+                                <input type="text" name="school_id" id="school_id" value="{{$school->id}}" hidden>
                                 <div class="form-group">
                                     <h5>地區</h5>
                                     <select name="district" id="district" >

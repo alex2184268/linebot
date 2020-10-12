@@ -10,8 +10,7 @@ use App\Group;
 
 class EditController extends Controller
 {
-    public function school(Request $request)
-    {
+    public function school(Request $request) {
         $id = $request->data;
         $school = School::find($id);
         $district = District::all();
@@ -22,8 +21,7 @@ class EditController extends Controller
                                     'group' => $group ]);
     }
 
-    public function group(Request $request)
-    {
+    public function group(Request $request) {
         $id = $request->data;
         $user = Line::find($id);
         $school = School::all();
@@ -33,10 +31,9 @@ class EditController extends Controller
 
     }
 
-    public function update_user(Request $request)
-    {
+    public function update_user(Request $request) {
         $sql = Line::find($request->user_id);
-        $sql->user_name = $request->user_name;
+        //$sql->user_name = $request->user_name;
         $sql->person_name =  $request->person_name;
         $sql->school = $request->school;
         $sql->phone = $request->phone; 
@@ -45,7 +42,17 @@ class EditController extends Controller
         {
             return  redirect()->route('group');
         }
+    }
 
+    public function update_school(Request $request) {
+        $sql = School::find($request->school_id);
+        $sql->district_id = $request->district;
+        $sql->SCHOOL_NAME = $request->school_name;
+        $sql->school_type = $request->group;
 
+        if ($sql->save()) {
+            return redirect()->route('school.group');
+        }
+        
     }
 }

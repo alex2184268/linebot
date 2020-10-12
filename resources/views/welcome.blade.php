@@ -71,7 +71,7 @@
                     @auth
                         <a href="{{ url('/home') }}">管理介面</a>
                     @else
-                        <a href="{{ route('login') }}">登入</a>
+                        <a href="{{ route('login') }}">管理登入</a>
 
                         @if (Route::has('register'))
                             <!--<a href="{{ route('register') }}">註冊</a> -->

@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function ()
 
     Route::get('apporve', 'ApporveController@index')->name('apporve'); //顯示未審核人員
 
-    Route::get('users.approve/{user_id}', 'ApporveController@apporve')->name('users.approve'); //審核
+    Route::post('users.approve', 'ApporveController@apporve')->name('users.approve'); //審核
 
     Route::post('delete', 'ApporveController@delete')->name('delete');  //取消審核
 
@@ -46,6 +46,7 @@ Route::middleware(['auth'])->group(function ()
 
     Route::post('edit.group','EditController@group')->name('edit.group'); //編輯群組
 
+    Route::post('update.school', 'EditController@update_school')->name('update.school');//確定修改學校
 
     Route::post('update.user', 'EditController@update_user')->name('update.user'); //確定修改用戶
 
@@ -91,7 +92,9 @@ Route::middleware(['auth'])->group(function ()
 
 });
 
-Route::get('register.member', 'RegisterMemberController@index')->name('register_member');
+Route::get('register.member', 'RegisterMemberController@index')->name('register_member');//LIFF註冊會員
+
+Route::post('register_info', 'RegisterMemberController@register')->name('register_info');
 
 
 //Route::post('test', 'LineWebhookController@webhook')->name('line.webhook');

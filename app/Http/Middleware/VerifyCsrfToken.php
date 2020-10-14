@@ -23,5 +23,6 @@ class VerifyCsrfToken extends Middleware
         '/callback',
         'value',
         'webhook_test',
+        'users.approve',
     ];
 }

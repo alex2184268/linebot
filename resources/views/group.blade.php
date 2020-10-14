@@ -17,6 +17,7 @@
                     <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="搜尋學校" >
                     <input type="text" id="myInput3" onkeyup="myFunction3()" placeholder="搜尋聯絡電話" >
                     <label for=""></label>
+                    <div class="table-responsive-sm">
                         <table id="myTable" class="table table-primary text-black ">
                             <thead>
                                 <tr>
@@ -55,6 +56,7 @@
                                 @endforelse
                             </tbody>
                         </table>
+                    </div>    
                         <script>
                             
                         function myFunction() {

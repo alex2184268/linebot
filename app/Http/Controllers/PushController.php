@@ -166,7 +166,7 @@ class PushController extends Controller
  * */
 
             foreach ($school as $value) {
-                $sql = Line::select('user_id')->where('school', $value)->get()->toArray(); //找出相符學校的帳號
+                $sql = Line::select('user_id')->where('school', $value, 'AND')->whereNotNull('apporved')->get()->toArray(); //找出相符學校的帳號
                 foreach ($sql as $item) {
                     $users[] = $item['user_id'];
                 }

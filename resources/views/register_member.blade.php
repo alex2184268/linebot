@@ -21,7 +21,7 @@
         <div class="card-body text-center">
         <form  method="post" action="{{ route('register_info')}}">
           @csrf
-          <div class="text-center mb-4">
+          <div class="text-center mb-auto mx-auto ">
             <img class="mb-4" src="https://www.tycg.gov.tw/edu/img/_logo.png" alt="" >
             <h1 class="h3 mb-3 font-weight-normal">桃園市教育局LINE註冊</h1>
             <p>請選擇您的學校，等待管理員審核後即可收到桃園市教育局LINE通知訊息</p>
@@ -30,23 +30,25 @@
               <input type="text" id="YourProfile" name="YourProfile" value="" hidden>
           </div>
           <div class="form-label-group">
-            <label for="name">姓名</label>
+            <label for="name">姓名：</label>
               <input type="text" id="name" name="name" value=""  required>
           </div>
+        </br>  
           <div class="form-label-group">
-            <label for="phone">電話</label>
+            <label for="phone">電話：</label>
               <input type="text" id="phone"" name="phone" value=""  required>
           </div>
+        </br>
           <div class="form-label-group ">
             <label for="district_list">選擇地區</label>
               <select name="district_list" id="district_list" onchange="ChangeSchool(this.value)"  class="form-control" style="width:auto;"></select>
           </div>
-
+        </br>
           <div class="form-label-group">
             <label for="school_list">選擇學校</label>
               <select name="school_list" id="school_list"  class="form-control" style="width:auto;"></select>
           </div>
-
+        </br>
             <button class="btn btn-primary " type="submit">註冊</button>
           </form>
         </div>

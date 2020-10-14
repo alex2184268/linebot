@@ -1,6 +1,8 @@
 <?php
 use App\School;
 use App\Line;
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,7 +76,7 @@ Route::middleware(['auth'])->group(function ()
     })->name('delete.school');
 
     Route::post('delete.user',function(Request $request){
-        $sql = Line::find($request->data)->delete();
+        $sql = Line::find($request->delete)->delete();
         return redirect()->back();
     })->name('delete.user');
 

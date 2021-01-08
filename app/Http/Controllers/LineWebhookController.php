@@ -23,8 +23,8 @@ class LineWebhookController extends Controller
         foreach ($events as $event) {
             if ($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage) { //確認是否跟TextMessage同一個CLASS
                 $reply_token = $event->getReplyToken();
-                $text = "已收到您的訊息";
-                $bot->replyText($reply_token, $text);
+                /*$text = "已收到您的訊息";
+                $bot->replyText($reply_token, $text);*/
             }
         }
 

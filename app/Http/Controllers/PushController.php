@@ -165,12 +165,17 @@ class PushController extends Controller
  * 獲取檔案大小
  * */
 
+            $sql = Line::select()->whereIn('school', $school)->whereNotNull('apporved')->get()->toArray();
+            foreach ($sql as $item) {
+                $users[] = $item['user_id'];
+                }
+/*
             foreach ($school as $value) {
                 $sql = Line::select('user_id')->where('school', $value, 'AND')->whereNotNull('apporved')->get()->toArray(); //找出相符學校的帳號
                 foreach ($sql as $item) {
                     $users[] = $item['user_id'];
                 }
-            }
+            }*/
 
             /**人數檢查 如果超過150就分開存入total_user*/
             $total_user = array();

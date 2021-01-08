@@ -17,7 +17,22 @@ class RegisterMemberController extends Controller
     }
 
     public function register(Request $request) {
-        $line = new Line;
+        $messages = array(
+            'YourProfile.required' => 'You not have userID!', 
+            'YourProfile.unique'   => '您的資料正在審核或已通過，勿重複註冊',
+            'name.max'             => '使用者名稱過長',
+            'required'             => '請填寫所有資料，請勿空白',
+            'phone.regex'          => '請填寫正確手機號碼格式，ex:0912345678',
+
+        );
+
+
+        $validatedData = $request->validate([
+            'YourProfile' => 'required|unique:line_user,user_id|max:100',
+            'name'        => 'required|max:100',
+            'phone'       => 'required|regex:/(09)[0-9]{8}/', //09開頭 0-9數字 還有8個數字
+        ],$messages);//
+        $line = new Line;//DB to insrt LINE USer
         $line->user_id      = $request->YourProfile;
         $line->person_name  = $request->name;
         $line->created_at = now();

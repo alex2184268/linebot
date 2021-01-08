@@ -14,6 +14,9 @@ class ImportController extends Controller
     {
         // The user is logged in...
         $file_mimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        /**
+        *text/comma-separated-values 逗號分隔CSV
+        */
         if (isset($_FILES['file']['name']) && in_array($_FILES['file']['type'], $file_mimes)) //檔案是否存在
         {
             
@@ -45,7 +48,7 @@ class ImportController extends Controller
                         ]);
                     }
                 }    
-                return redirect()->route('home')->with('message', "新增成功!總共新增$count" . "筆");
+                return redirect()->route('home')->with('message', "新增成功!總共新增$count" . "筆");//redirect home and 
             }
         }
 }

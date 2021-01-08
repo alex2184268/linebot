@@ -3,7 +3,9 @@ use App\Line;
 use Ycs77\LaravelLineBot\Facades\LineBot as LineBot_PK;
 use App\Log;
 use Illuminate\Http\Request;
-
+/**已停用改掛載至webhookcontroller
+ *  J00014-201000007
+ */
 
 
 LineBot_PK::on()->fallback(function () {

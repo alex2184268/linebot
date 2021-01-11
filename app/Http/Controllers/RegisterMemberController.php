@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\School;
 use App\District;
 use App\Line;
+use App\Jobs\LineUserRegisterJob;
 
 class RegisterMemberController extends Controller
 {
@@ -32,15 +33,20 @@ class RegisterMemberController extends Controller
             'name'        => 'required|max:100',
             'phone'       => 'required|regex:/(09)[0-9]{8}/', //09開頭 0-9數字 還有8個數字
         ],$messages);//
-        $line = new Line;//DB to insrt LINE USer
-        $line->user_id      = $request->YourProfile;
-        $line->person_name  = $request->name;
-        $line->created_at = now();
-        $line->school       = $request->school_list;
-        $line->phone        = $request->phone;
+        $UserData = [
+            'userID'      => $request->YourProfile,
+            'person_name' => $request->name,
+            'created_at'  => now(),
+            'school'      => $request->school_list,
+            'phone'       => $request->phone,
+        ];
 
-        if($line->save()) {
+        if(LineUserRegisterJob::dispatch($UserData)) 
+        {
             return '<html><script>alert("已收到您的資料，請靜待審核");</script></html>';
+        }else
+        {
+            return '<html><script>alert("傳送資料失敗!!");</script></html>';
         }
     }
 }

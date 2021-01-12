@@ -14,7 +14,7 @@
         "laravel/tinker": "^1.0",
         "linecorp/line-bot-sdk": "^4.2",
         "phpoffice/phpspreadsheet": "^1.11",
-        "predis/predis": "^1.0",
+        "predis/predis": "^1.1",
         "ycs77/laravel-line-bot": "^0.3.0"
     },
     "require-dev": {

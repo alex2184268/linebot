@@ -27,7 +27,7 @@
                             @foreach($school as $item)
                                 <input hidden type="text" name="school[]" value="{{ $item }}">
                             @endforeach
-                            <button type="submit" name="SubmitMessage" class="btn btn-primary"  disabled>發送訊息</button>
+                            <button type="submit" name="SubmitMessage" class="btn btn-primary"  >發送訊息</button>
                         </div>
                     </form>
                 </div>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Http\Controllers\LineWebhookController;
 use App\Line;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
@@ -14,17 +14,19 @@ use Illuminate\Support\Facades\Storage;
 
 
 
-class PushController extends Controller
+class PushController extends LineWebhookController
 {
+    private $msg;
+    
+    public function __construct()
+    {
+        parent::__construct();
+        $this->msg = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
+    }
+
     public function index()
     {
         return view('push_message');
-    }
-
-    public function custom()
-    {
-        
-
     }
 
     public function school()
@@ -35,7 +37,6 @@ class PushController extends Controller
         return view('push_school', ['school' => $school, 
                                     'district' => $district,
                                     'group'=> $group]);
-
     }
 
     public function district()
@@ -44,7 +45,6 @@ class PushController extends Controller
         $district = District::all();
         return view('push_district', ['school' => $school, 'district' => $district]);
 
-        
     }
 
     public function text()
@@ -55,27 +55,16 @@ class PushController extends Controller
     public function push()//測試區controller
     {
         try {
-
-            $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('gBQKRzMBMThDW7dhQhwfyHad3jp27SMGi/YiB0hsCM+veDAhuMYd3awSh/9dUyOys6F0wT+3wbl3dpnC5DONrlH3zk5mnrz7a5igamK3SArSkYwBh6WTGt3xvhAZWQUe0/L4y+RHbpS188I9LjOjJgdB04t89/1O/w1cDnyilFU=');
-            $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '582dabf4363f6b9783f5de5d2247b194']);
-
-            //$httpClient = channel access token  $bot = channel secret
-
+            $bot = $this->bot;
             $code = '100078';
             $bin = hex2bin(str_repeat('0', 8 - strlen($code)) . $code);
             $emoticon = mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
 
-
             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("唉呦,是不是又在亂花錢？\x{1F480}");//放最多5個參數
 
-            //$imageMessageBuilder = new \LINE\LINEBot\MessageBuilder\ImageMessageBuilder('https://line.tyc.edu.tw/images/helloworld.jpeg','https://line.tyc.edu.tw/images/helloworld.jpeg');
+            $msg = $this->msg;//多個訊息 object
 
-            $msg = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();//多個訊息 object
-
-
-            $msg->add($textMessageBuilder);
-            //$msg->add($imageMessageBuilder);
-
+            $msg->add($textMessageBuilder);//$msg->add($imageMessageBuilder);
             
             /**
              * 
@@ -85,16 +74,12 @@ class PushController extends Controller
              */
 
             $userIds = ['U51cbf7fcc05c0be743af13086dec11f1']; //userID
-            $bot->multicast($userIds, $msg); //$textMessageBuilder文字訊息物件
-            //$bot->multicast($userIds, '<message>');
-
+            $bot->multicast($userIds, $msg); //$textMessageBuilder文字訊息物件 $bot->multicast($userIds, '<message>');
 
         } catch (\Throwable $th) { //throw error message
             $error = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($th->getMessage());
             $userIds = ['U51cbf7fcc05c0be743af13086dec11f1']; //userID
             $bot->multicast($userds, $error); //$textMessageBuilder文字訊息物件
-
-
         }
 
     }
@@ -103,8 +88,6 @@ class PushController extends Controller
     {
         $a = $request->input('SchoolCode');
         
-        
-
         return view('push_message',[
             'school' => $a]);
     }
@@ -113,11 +96,8 @@ class PushController extends Controller
     {    
         $school = $request->input('school'); //選取的學校
         $users = array(); //最多150人
-
-        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('8nJlQRLvT+UhK0OeNm+e7DBtPpI2U5BQw44n22mZ7jkrYknKd0E4kOcc6fseFluiBByDxp7iNKPiCN+i1ywq5lMBrw4kX77KNDjErg2+5tzbmyqCbvkHqzhnuQuprAdlb7ej5VZa61hUzW5GQMer5wdB04t89/1O/w1cDnyilFU=');
-        $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '803d36e8fe03804672351bce451b4ca7']);
-        $msg = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder(); //群發object
-
+        $bot = $this->bot;//parent::contruct $bot
+        $msg = $this->msg; //群發object
 
         for( $t=0; $t<5; $t++){
             $type = gettype($request->input("$t"));

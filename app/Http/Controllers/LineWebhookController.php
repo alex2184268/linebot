@@ -10,10 +10,10 @@ use LINE\LINEBot\Constant\HTTPHeader;
 
 class LineWebhookController extends Controller
 {
-    private $bot;
-    private $httpClient;
-    private $channel_access_token;
-    private $channel_secret;
+    protected $bot;
+    protected $httpClient;
+    protected $channel_access_token;
+    protected $channel_secret;
 
     public function __construct()
     {

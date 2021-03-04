@@ -26,7 +26,7 @@ class LineUserRegisterJob implements ShouldQueue
     public function __construct($UserData)
     {
         
-        $this->UserData = $UserData;
+        $this->UserData = $UserData;//User資料
     }
 
     /**
@@ -37,6 +37,7 @@ class LineUserRegisterJob implements ShouldQueue
     //執行工作
     public function handle()
     {
+        /**JOB 新增 redis queue */
         $UserData = $this->UserData;
 
         $line = new Line;

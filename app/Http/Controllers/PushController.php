@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PushController extends LineWebhookController
 {
-    private $msg;
+    protected $msg;
     
     public function __construct()
     {
@@ -52,37 +52,6 @@ class PushController extends LineWebhookController
         return view('push_text');
     }
 
-    public function push()//測試區controller
-    {
-        try {
-            $bot = $this->bot;
-            $code = '100078';
-            $bin = hex2bin(str_repeat('0', 8 - strlen($code)) . $code);
-            $emoticon = mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
-
-            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("唉呦,是不是又在亂花錢？\x{1F480}");//放最多5個參數
-
-            $msg = $this->msg;//多個訊息 object
-
-            $msg->add($textMessageBuilder);//$msg->add($imageMessageBuilder);
-            
-            /**
-             * 
-             * 'type' => MessageType::IMAGE,
-             * 'originalContentUrl' => $this->originalContentUrl,
-             * 'previewImageUrl' => $this->previewImageUrl,
-             */
-
-            $userIds = ['U51cbf7fcc05c0be743af13086dec11f1']; //userID
-            $bot->multicast($userIds, $msg); //$textMessageBuilder文字訊息物件 $bot->multicast($userIds, '<message>');
-
-        } catch (\Throwable $th) { //throw error message
-            $error = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($th->getMessage());
-            $userIds = ['U51cbf7fcc05c0be743af13086dec11f1']; //userID
-            $bot->multicast($userds, $error); //$textMessageBuilder文字訊息物件
-        }
-
-    }
 
     public function check(Request $request)
     {
@@ -181,6 +150,42 @@ class PushController extends LineWebhookController
 
             return redirect()->route('home')->with('message', "已發送訊息!!共計".$count."位使用者");
             
+    }
+
+
+
+    
+
+    public function push()//測試區controller
+    {
+        try {
+            $bot = $this->bot;
+            $code = '100078';
+            $bin = hex2bin(str_repeat('0', 8 - strlen($code)) . $code);
+            $emoticon = mb_convert_encoding($bin, 'UTF-8', 'UTF-32BE');
+
+            $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("唉呦,是不是又在亂花錢？\x{1F480}");//放最多5個參數
+
+            $msg = $this->msg;//多個訊息 object
+
+            $msg->add($textMessageBuilder);//$msg->add($imageMessageBuilder);
+            
+            /**
+             * 
+             * 'type' => MessageType::IMAGE,
+             * 'originalContentUrl' => $this->originalContentUrl,
+             * 'previewImageUrl' => $this->previewImageUrl,
+             */
+
+            $userIds = ['U51cbf7fcc05c0be743af13086dec11f1']; //userID
+            $bot->multicast($userIds, $msg); //$textMessageBuilder文字訊息物件 $bot->multicast($userIds, '<message>');
+
+        } catch (\Throwable $th) { //throw error message
+            $error = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($th->getMessage());
+            $userIds = ['U51cbf7fcc05c0be743af13086dec11f1']; //userID
+            $bot->multicast($userds, $error); //$textMessageBuilder文字訊息物件
+        }
+
     }
 }
 

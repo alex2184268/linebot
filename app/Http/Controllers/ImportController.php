@@ -23,10 +23,11 @@ class ImportController extends Controller
             $arr_file = explode('.', $_FILES['file']['name']); //分割字串
             $extension = end($arr_file); //副檔名
             
-            if ('csv' == $extension) {
-                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+            if ('csv' == $extension) 
+            {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();//Csv package new
             } elseif ('xlsx' == $extension) {
-                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();//Xlsx package new 
             }
             
             $spreadsheet = $reader->load($_FILES['file']['tmp_name']);
@@ -36,7 +37,8 @@ class ImportController extends Controller
             //return view('',$sheetData=>$sheetData);
             // /end customize
             $count = count($sheetData);
-            if (is_array($sheetData)) {
+            if (is_array($sheetData)) 
+            {
                 foreach ($sheetData as $row => $value) {
                     Line::create([
                         'user_id' => $value[0],

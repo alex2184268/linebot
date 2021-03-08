@@ -28,102 +28,16 @@
                                             <input type="checkbox" id="{{ $value->id}}" onclick="checkdistrict({{$value->id}},this);">
                                             <label for="{{ $value->id}}">{{ $value->DISTRICT }}</label>
                                         </th>
-                                        <th>
+                                        @foreach ($group as $group2)
+                                            <th>
                                             @foreach ($school as $school2)
-                                                @if ($school2->school_type == 1 && $school2->district_id == $value->id)
+                                                @if ($school2->school_type == $group2->id && $school2->district_id == $value->id)
                                                     <input type="checkbox" class="{{$school2->district_id}} {{$school2->school_type}}" name="SchoolCode['{{ $school2->SCHOOL_NAME }}']" value="{{ $school2->id}}" id="{{ $school2->id}}" onclick="chkRegionColor(1);">
                                                     <label for="{{ $school2->id}}">{{ $school2->SCHOOL_NAME }}</label><br>
                                                 @endif
                                             @endforeach
-                                        </th>
-                                        <th>
-                                            @foreach ($school as $school2)
-                                                @if ($school2->school_type == 2 && $school2->district_id == $value->id)
-                                                    <input type="checkbox" class="{{$school2->district_id}} {{$school2->school_type}}" name="SchoolCode['{{ $school2->SCHOOL_NAME }}']" value="{{ $school2->id}}" id="{{ $school2->id}}" onclick="chkRegionColor(1);">
-                                                    <label for="{{ $school2->id}}">{{ $school2->SCHOOL_NAME }}</label><br>
-                                                @endif
-                                            @endforeach
-                                        </th>
-                                        <th>
-                                            @foreach ($school as $school2)
-                                                @if ($school2->school_type == 3 && $school2->district_id == $value->id)
-                                                    <input type="checkbox" class="{{$school2->district_id}} {{$school2->school_type}}" name="SchoolCode['{{ $school2->SCHOOL_NAME }}']" value="{{ $school2->id}}" id="{{ $school2->id}}" onclick="chkRegionColor(1);">
-                                                    <label for="{{ $school2->id}}">{{ $school2->SCHOOL_NAME }}</label><br>
-                                                @endif
-                                            @endforeach
-                                        </th>
-                                        <th>
-                                            @foreach ($school as $school2)
-                                                @if ($school2->school_type == 4 && $school2->district_id == $value->id)
-                                                    <input type="checkbox" class="{{$school2->district_id}} {{$school2->school_type}}" name="SchoolCode['{{ $school2->SCHOOL_NAME }}']" value="{{ $school2->id}}" id="{{ $school2->id}}" onclick="chkRegionColor(1);">
-                                                    <label for="{{ $school2->id}}">{{ $school2->SCHOOL_NAME }}</label><br>
-                                                @endif
-                                            @endforeach
-                                        </th>
-                                        <th>
-                                            @foreach ($school as $school2)
-                                                @if ($school2->school_type == 5 && $school2->district_id == $value->id)
-                                                    <input type="checkbox" class="{{$school2->district_id}} {{$school2->school_type}}" name="SchoolCode['{{ $school2->SCHOOL_NAME }}']" value="{{ $school2->id}}" id="{{ $school2->id}}" onclick="chkRegionColor(1);">
-                                                    <label for="{{ $school2->id}}">{{ $school2->SCHOOL_NAME }}</label><br>
-                                                @endif
-                                            @endforeach
-                                        </th>
-                                        <th>
-                                            @foreach ($school as $school2)
-                                                @if ($school2->school_type == 6 && $school2->district_id == $value->id)
-                                                    <input type="checkbox" class="{{$school2->district_id}} {{$school2->school_type}}" name="SchoolCode['{{ $school2->SCHOOL_NAME }}']" value="{{ $school2->id}}" id="{{ $school2->id}}" onclick="chkRegionColor(1);">
-                                                    <label for="{{ $school2->id}}">{{ $school2->SCHOOL_NAME }}</label><br>
-                                                @endif
-                                            @endforeach
-                                        </th>
-                                        <th>
-                                            @foreach ($school as $school2)
-                                                @if ($school2->school_type == 7 && $school2->district_id == $value->id)
-                                                    <input type="checkbox" class="{{$school2->district_id}} {{$school2->school_type}}" name="SchoolCode['{{ $school2->SCHOOL_NAME }}']" value="{{ $school2->id}}" id="{{ $school2->id}}" onclick="chkRegionColor(1);">
-                                                    <label for="{{ $school2->id}}">{{ $school2->SCHOOL_NAME }}</label><br>
-                                                @endif
-                                            @endforeach
-                                        </th>
-                                        <th>
-                                            @foreach ($school as $school2)
-                                                @if ($school2->school_type == 8 && $school2->district_id == $value->id)
-                                                    <input type="checkbox" class="{{$school2->district_id}} {{$school2->school_type}}" name="SchoolCode['{{ $school2->SCHOOL_NAME }}']" value="{{ $school2->id}}" id="{{ $school2->id}}" onclick="chkRegionColor(1);">
-                                                    <label for="{{ $school2->id}}">{{ $school2->SCHOOL_NAME }}</label><br>
-                                                @endif
-                                            @endforeach
-                                        </th>
-                                        <th>
-                                            @foreach ($school as $school2)
-                                                @if ($school2->school_type == 9 && $school2->district_id == $value->id)
-                                                    <input type="checkbox" class="{{$school2->district_id}} {{$school2->school_type}}" name="SchoolCode['{{ $school2->SCHOOL_NAME }}']" value="{{ $school2->id}}" id="{{ $school2->id}}" onclick="chkRegionColor(1);">
-                                                    <label for="{{ $school2->id}}">{{ $school2->SCHOOL_NAME }}</label><br>
-                                                @endif
-                                            @endforeach
-                                        </th>
-                                        <th>
-                                            @foreach ($school as $school2)
-                                                @if ($school2->school_type == 10 && $school2->district_id == $value->id)
-                                                    <input type="checkbox" class="{{$school2->district_id}} {{$school2->school_type}}" name="SchoolCode['{{ $school2->SCHOOL_NAME }}']" value="{{ $school2->id}}" id="{{ $school2->id}}" onclick="chkRegionColor(1);">
-                                                    <label for="{{ $school2->id}}">{{ $school2->SCHOOL_NAME }}</label><br>
-                                                @endif
-                                            @endforeach
-                                        </th>
-                                        <th>
-                                            @foreach ($school as $school2)
-                                                @if ($school2->school_type == 11 && $school2->district_id == $value->id)
-                                                    <input type="checkbox" class="{{$school2->district_id}} {{$school2->school_type}}" name="SchoolCode['{{ $school2->SCHOOL_NAME }}']" value="{{ $school2->id}}" id="{{ $school2->id}}" onclick="chkRegionColor(1);">
-                                                    <label for="{{ $school2->id}}">{{ $school2->SCHOOL_NAME }}</label><br>
-                                                @endif
-                                            @endforeach
-                                        </th>
-                                        <th>
-                                            @foreach ($school as $school2)
-                                                @if ($school2->school_type == 12 && $school2->district_id == $value->id)
-                                                    <input type="checkbox" class="{{$school2->district_id}} {{$school2->school_type}}" name="SchoolCode['{{ $school2->SCHOOL_NAME }}']" value="{{ $school2->id}}" id="{{ $school2->id}}" onclick="chkRegionColor(1);">
-                                                    <label for="{{ $school2->id}}">{{ $school2->SCHOOL_NAME }}</label><br>
-                                                @endif
-                                            @endforeach
-                                        </th>
+                                            </th>
+                                        @endforeach
                                     </tr>
                                     @endforeach
                                 </tbody>

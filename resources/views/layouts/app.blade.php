@@ -39,29 +39,29 @@
                     <ul class="navbar-nav mr-auto">
                         <ul class="navbar-nav  navbar-right">
                             <a class="nav-link" href="{{ route('apporve') }}">
-                                {{ __('Line帳號審核') }}
+                                {{ __('帳號審核') }}
                             </a>
                         </ul>
                         <ul class="navbar-nav  navbar-right">
                             <a class="nav-link" href="{{ route('group') }}">
-                                {{ __('用戶群組管理') }}
+                                {{ __('用戶管理') }}
                             </a>
                         </ul>
                         <ul class="navbar-nav  navbar-right">
                             <a class="nav-link" href="{{ route('school.group') }}">
-                                {{ __('學校群組管理') }}
+                                {{ __('學校管理') }}
                             </a>
                         </ul>
 
                         <ul class="navbar-nav  navbar-right">
                             <a class="nav-link" href="{{ route('push.school') }}">
-                                {{ __('LINE訊息群發') }}
+                                {{ __('訊息群發') }}
                             </a>
                         </ul>
 
                         <ul class="navbar-nav  navbar-right">
                             <a class="nav-link" href="{{ route('excel') }}">
-                                {{ __('Excel匯入學校') }}
+                                {{ __('匯入學校') }}
                             </a>
                         </ul>
                     </ul>

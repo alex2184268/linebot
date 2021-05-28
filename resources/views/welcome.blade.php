@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>桃園市教育局LineBot管理系統</title>
+        <title>桃園市政府教育局LINE@訊息發送系統</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -82,7 +82,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    桃園市教育局LineBot管理系統
+                    桃園市政府教育局LINE@訊息發送系統
                 </div>
 
                 <div class="links">
